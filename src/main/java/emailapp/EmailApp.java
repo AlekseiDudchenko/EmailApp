@@ -6,5 +6,6 @@ public class EmailApp {
 
         System.out.println("Hi world");
 
+
     }
 }
