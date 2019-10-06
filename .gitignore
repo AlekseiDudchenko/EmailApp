@@ -1,4 +1,5 @@
-.idea
+/.idea
 pom.xml
 EmailApp.iml
 target
+*.xml
