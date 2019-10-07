@@ -3,7 +3,10 @@ package emailapp;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.IntStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class EmailTest {
 
@@ -17,11 +20,23 @@ class EmailTest {
 
     @Test
     void threeArgumentConstructorTest(){
-        Email email = new Email("Petr", "Petrov", 3);
-        assertEquals("Accounting", email.getDepartment());
-        assertEquals("Petr", email.getFirstName());
-        assertEquals("Petrov", email.getLastName());
-        assertEquals(Email.getNumber(), email.getId());
+        Email salesEmail = new Email("Petr", "Petrov", 1);
+        assertEquals("Petr", salesEmail.getFirstName());
+        assertEquals("Petrov", salesEmail.getLastName());
+        assertEquals(Email.getNumber(), salesEmail.getId());
+        assertEquals(Constants.SALES , salesEmail.getDepartment());
+
+        Email developmentEmail = new Email("Petr", "Petrov", 2);
+        assertEquals(Constants.DEVELOPMENT , developmentEmail.getDepartment());
+
+        Email accountingEmail = new Email("Petr", "Petrov", 3);
+        assertEquals(Constants.ACCOUNTING , accountingEmail.getDepartment());
+
+        Email otherEmail = new Email("Petr", "Petrov", 4);
+        assertEquals(Constants.OTHER , otherEmail.getDepartment());
+
+        Email unknownDepartmentEmail = new Email("San", "Sanich", 5);
+        assertEquals(Constants.UNKNOWN , unknownDepartmentEmail.getDepartment());
     }
 
     @Test
@@ -53,5 +68,27 @@ class EmailTest {
         Email email4 = new Email("Ivan", "Ivanov", "OTHER");
         assertEquals(Constants.OTHER, email4.getDepartment());
     }
+
+    @Test
+    void generatePasswordTest(){
+        IntStream.range(0, 100000).forEach(n -> {
+            assertNotEquals(Email.generatePassword(Email.randomIntFromRange(Email.minPasswordLength, Email.maxPasswordLength)),
+                    Email.generatePassword(Email.randomIntFromRange(Email.minPasswordLength, Email.maxPasswordLength)));
+        });
+    }
+
+    @Test
+    void toStringTest(){
+        Email email = new Email("Ivan", "Sidorov");
+        String expectedString = "ID: " + Email.getNumber() + "Name: Ivan Sidorov";
+        assertEquals(expectedString, email.toString());
+    }
+
+    @Test
+    void constructorWithEnterDepartmentTest() {
+        //TODO mock Scanner
+//        Email email = new Email("Vladimir", "Medvedev", true);
+    }
+
 
 }

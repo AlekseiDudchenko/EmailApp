@@ -1,5 +1,6 @@
 package emailapp;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import static emailapp.Constants.*;
@@ -14,6 +15,8 @@ public class Email {
     private String department;
     private int mailboxCapacity;
     private String alternateEmail;
+    protected static int minPasswordLength = 7;
+    protected static int maxPasswordLength = 12;
 
     Email(String firstName, String lastName, int departmentCode){
         this(firstName,lastName);
@@ -34,7 +37,6 @@ public class Email {
                 this.department = UNKNOWN;
                 break;
         }
-
     }
 
     Email(String firstName, String lastName, String department){
@@ -46,20 +48,30 @@ public class Email {
             this.department = department.substring(0, 1).toUpperCase() +
                     department.substring(1).toLowerCase();
         }
-        else this.department = UNKNOWN;
     }
 
     Email(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
+        this.department = UNKNOWN;
+        this.password = generatePassword(randomIntFromRange(minPasswordLength, maxPasswordLength));
         this.id = ++number;
+    }
+
+    protected static int randomIntFromRange(int min, int max){
+        return new Random().nextInt((max - min) + 1) + min;
+    }
+
+    Email(String firstName, String lastName, boolean enterDepartmentFromKeyboard){
+        this(firstName, lastName);
+        department = (enterDepartmentFromKeyboard) ? enterDepartment() : UNKNOWN;
     }
 
     @Override
     public String toString() {
-        String st = "ID: " +
-                id;
-        return st;
+        String string = "ID: " + id +  //TODO use stringBuilder and/or formater
+                "Name: " +  getFirstName() + " " + getLastName();
+        return string;
     }
 
     public void print(){
@@ -106,7 +118,7 @@ public class Email {
         return department;
     }
 
-    public String enterDepartment() {
+    private String enterDepartment() {
         System.out.println("Enter the department code.\n " +
                 "1 - Sales\n " +
                 "2 - Development\n " +
@@ -148,7 +160,20 @@ public class Email {
         this.alternateEmail = alternateEmail;
     }
 
-
+    /**
+     * Generates pseudo random password
+     * @param length
+     * @return new password
+     */
+    protected static String generatePassword(int length){
+        String passwordSet = "QWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+1234567890";
+        char[] password = new char[length];
+        for (int i = 0; i<length; i++){
+            int rand = (int) (Math.random() * passwordSet.length());
+            password[i] = passwordSet.charAt(rand);
+        }
+        return  new String(password);
+    }
 
 
 
