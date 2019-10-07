@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import static emailapp.Constants.*;
 
+// add exceptions
 public class Email {
 
     static private int number = 0;
@@ -72,6 +73,13 @@ public class Email {
         String string = "ID: " + id +  //TODO use stringBuilder and/or formater
                 "Name: " +  getFirstName() + " " + getLastName();
         return string;
+    }
+
+    /**
+     * Generates email address
+     */
+    public String generateEmailAddress(){
+        return "";
     }
 
     public void print(){
