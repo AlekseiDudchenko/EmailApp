@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import static emailapp.Constants.*;
 
-// add exceptions
 public class Email {
 
     static private int number = 0;
@@ -181,6 +180,13 @@ public class Email {
 
     public void setAlternateEmail(String alternateEmail) {
         this.alternateEmail = alternateEmail;
+    }
+
+    //TODO specify exception
+    public void changePassword (String password) throws Exception {
+        if (password.length() > 7)
+            this.password = password;
+        else throw new Exception();
     }
 
     /**
