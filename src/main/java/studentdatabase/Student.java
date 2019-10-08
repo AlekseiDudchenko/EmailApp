@@ -1,5 +1,7 @@
 package studentdatabase;
 
+import constants.Constants;
+
 import java.util.ArrayList;
 
 public class Student {
@@ -8,21 +10,23 @@ public class Student {
     private String lastName;
     private int id;
     private String gradeYear;
-    private int studentID;
-    private ArrayList<Course> courses;
-    private int tuitionBalance;
+    private ArrayList<Course> courses = new ArrayList<>();
     private int totalTuition = 0;
     private static int number = 0;
 
     public Student(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
-        gradeYear = "first";
+        id = ++number;
+        gradeYear = Constants.FRESHMEN;
     }
 
     public void setGradeYear(String gradeYear){
         this.gradeYear = gradeYear;
-        id = ++number;
+    }
+
+    public String getGradeYear(){
+        return gradeYear;
     }
 
     public void addCourse(Course course){
@@ -32,6 +36,10 @@ public class Student {
 
     public int getTotalTuition(){
         return totalTuition;
+    }
+
+    public ArrayList<Course> getEnrolledCourses(){
+        return courses;
     }
 
     public int getNumberOfEnrolledCourses(){
