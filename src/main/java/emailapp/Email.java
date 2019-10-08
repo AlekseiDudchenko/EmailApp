@@ -3,7 +3,7 @@ package emailapp;
 import java.util.Random;
 import java.util.Scanner;
 
-import static emailapp.Constants.*;
+import static constants.Constants.*;
 
 public class Email {
 
