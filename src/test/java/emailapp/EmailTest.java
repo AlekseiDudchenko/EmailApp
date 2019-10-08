@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EmailTest {
 
@@ -89,6 +88,37 @@ class EmailTest {
         //TODO mock Scanner
 //        Email email = new Email("Vladimir", "Medvedev", true);
     }
+
+    @Test
+    void generateEmailAddressNoDepartmentTest() throws Exception {
+        Email email =  new Email("Bill", "Bucsh");
+        assertEquals(Constants.UNKNOWN, email.getDepartment());
+        assertThrows(Exception.class, email::generateEmailAddress);
+    }
+
+    @Test
+    void generateEmailAddressWrongDepartmentTest() throws Exception {
+        Email email =  new Email("Bill", "Bucsh", "adfsd");
+        assertEquals(Constants.UNKNOWN, email.getDepartment());
+        assertThrows(Exception.class, email::generateEmailAddress);
+    }
+
+    @Test
+    void generateEmailAddressWrongDepartmentNumberTest(){
+        Email email = new Email("adfasd", "asdfd", 6);
+        assertEquals(Constants.UNKNOWN, email.getDepartment());
+        assertThrows(Exception.class, email::generateEmailAddress);
+    }
+
+    @Test
+    void generateEmailAddressTest() throws Exception {
+        Email email =  new Email("Adsa", "QWDSFASDF", Constants.SALES);
+        assertEquals("adsa.qwdsfasdf@sales.thecompany.de", email.generateEmailAddress());
+    }
+
+
+
+
 
 
 }

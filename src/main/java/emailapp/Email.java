@@ -78,8 +78,17 @@ public class Email {
     /**
      * Generates email address
      */
-    public String generateEmailAddress(){
-        return "";
+    public String generateEmailAddress() throws Exception {
+        if (departmentSetAndKnown())
+            return firstName.toLowerCase() + "." +
+                lastName.toLowerCase() + "@" +
+                department.toLowerCase() + "." +
+                EMAILCOMPANYSUFFIX;
+        else throw new Exception();
+    }
+
+    private boolean departmentSetAndKnown(){
+        return (department != null && !department.isEmpty() && !OTHER.equals(department) && !UNKNOWN.equals(department));
     }
 
     public void print(){
@@ -94,15 +103,15 @@ public class Email {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void changeFirstNameTo(String firstName) {
         this.firstName = firstName;
     }
 
@@ -110,12 +119,18 @@ public class Email {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void changeLastNameTo(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
+    private String getPassword() {
         return password;
+    }
+
+    public boolean passwordValid(String password) throws Exception {
+        if (this.password != null && password != null)
+            return this.password.equals(password);
+        else throw new Exception();
     }
 
     public void setPassword(String password) {
