@@ -3,3 +3,4 @@ pom.xml
 EmailApp.iml
 target
 *.xml
+*iml
