@@ -9,9 +9,9 @@ class CourseTest {
 
     @Test
     void constructorTest() throws Exception {
-        Course math = new Course("Math");
+        Course math = new Course("Music");
         assertEquals(100, math.getCost());
-        assertEquals("Math", math.getName());
+        assertEquals("Music", math.getName());
         assertEquals(Course.getNumberOfAvailableCourses(), math.getCourseId());
         Course engl = new Course(("English"));
         assertEquals(Course.getNumberOfAvailableCourses(), engl.getCourseId());
@@ -19,8 +19,8 @@ class CourseTest {
 
     @Test
     void addCourseThrowExceptionTest() throws Exception {
-        Course math = new Course("Math");
-        Course history = new Course("History");
+        Course math = new Course("Philosophy");
+        Course history = new Course("Art");
         assertThrows(Exception.class, () -> {
             Course emptyNameCourse = new Course("");
         });
