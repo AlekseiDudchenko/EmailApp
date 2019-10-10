@@ -40,8 +40,12 @@ public class Course {
         return name;
     }
 
-    public void changeNameTo(String name) {
-        this.name = name;
+    public void changeNameTo(String name) throws Exception {
+        if (name.equals("")) throw new Exception();
+        else if (containsCourseWithName(name)) throw new Exception();
+        else {
+            this.name = name;
+        }
     }
 
     public int getCost() {

@@ -49,15 +49,22 @@ class StudentTest {
         assertEquals(100, student.getTotalTuition());
         math.setCost(600);
         assertEquals(600, student.getTotalTuition());
-
-
     }
 
     @Test
-    void getEnrolledCourses() {
-    }
-
-    @Test
-    void getNumberOfEnrolledCourses() {
+    void getEnrolledCoursesAndGetNumberOfEnrolledCourses() throws Exception {
+        Student student = new Student("Bart", "Simpson");
+        assertEquals(0, student.getNumberOfEnrolledCourses());
+        Course philosophy = new Course("Philosophy");
+        Course art = new Course("Art");
+        student.addCourse(philosophy);
+        assertEquals(1, student.getNumberOfEnrolledCourses());
+        ArrayList<Course> expectedCourses = new ArrayList<>();
+        expectedCourses.add(philosophy);
+        assertEquals(expectedCourses, student.getEnrolledCourses());
+        student.addCourse(art);
+        expectedCourses.add(art);
+        assertEquals(expectedCourses, student.getEnrolledCourses());
+        assertEquals(2, student.getNumberOfEnrolledCourses());
     }
 }

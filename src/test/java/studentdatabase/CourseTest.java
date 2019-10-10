@@ -18,18 +18,30 @@ class CourseTest {
     }
 
     @Test
-    void addCourseThrowExceptionTest() throws Exception {
-        Course math = new Course("Philosophy");
-        Course history = new Course("Art");
+    void addCourseThrowExceptionAndChangeNameToTest() throws Exception {
+        Course ioT = new Course("IoT");
+        Course biology = new Course("Biology");
         assertThrows(Exception.class, () -> {
             Course emptyNameCourse = new Course("");
         });
 
         assertThrows(Exception.class, () -> {
-            Course againMath = new Course("Math");
+            Course againIoT = new Course("IoT");
         });
+
+        assertThrows(Exception.class, () -> {
+            biology.changeNameTo("IoT");
+        });
+
+        assertThrows(Exception.class, () -> {
+            biology.changeNameTo("iot");
+        });
+
+        assertThrows(Exception.class, () -> {
+            biology.changeNameTo("");
+        });
+
+        biology.changeNameTo("Biology 101");
+        assertEquals("Biology 101", biology.getName());
     }
-
-
-
 }
