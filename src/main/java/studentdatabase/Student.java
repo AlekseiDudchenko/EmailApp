@@ -11,7 +11,6 @@ public class Student {
     private int id;
     private String gradeYear;
     private ArrayList<Course> courses = new ArrayList<>();
-    private int totalTuition = 0;
     private static int number = 0;
 
     public Student(String firstName, String lastName){
@@ -31,10 +30,13 @@ public class Student {
 
     public void addCourse(Course course){
         courses.add(course);
-        totalTuition += course.getCost();
     }
 
     public int getTotalTuition(){
+        int totalTuition = 0;
+        for (Course cours: courses) {
+         totalTuition += cours.getCost();
+        }
         return totalTuition;
     }
 

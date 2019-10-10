@@ -38,11 +38,19 @@ class StudentTest {
     @Test
     void addCourseThrowExceptionTest() throws Exception {
         Student student = new Student("Ivan", "Ivanov");
-
     }
 
     @Test
-    void getTotalTuition() {
+    void getTotalTuition() throws Exception {
+        Student student = new Student("Moe", "Armstrong");
+        Course math = new Course("PE");
+        assertEquals(0, student.getTotalTuition());
+        student.addCourse(math);
+        assertEquals(100, student.getTotalTuition());
+        math.setCost(600);
+        assertEquals(600, student.getTotalTuition());
+
+
     }
 
     @Test
