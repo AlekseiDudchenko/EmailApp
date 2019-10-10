@@ -2,7 +2,8 @@ package studentdatabase;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import static constants.Constants.FRESHMEN;
 import static constants.Constants.JUNIOR;
@@ -21,11 +22,11 @@ class StudentTest {
     @Test
     void addCourseTest() throws Exception {
         Student student = new Student("Ivan","Ivanov");
-        assertEquals(new ArrayList<>(), student.getEnrolledCourses());
+        assertEquals(new HashSet<Course>(), student.getEnrolledCourses());
 
         Course math = new Course("Math");
         student.addCourse(math);
-        ArrayList<Course> expectedArrayList = new ArrayList<>();
+        Set<Course> expectedArrayList = new HashSet<>();
         expectedArrayList.add(math);
         assertEquals(expectedArrayList, student.getEnrolledCourses());
 
@@ -59,7 +60,7 @@ class StudentTest {
         Course art = new Course("Art");
         student.addCourse(philosophy);
         assertEquals(1, student.getNumberOfEnrolledCourses());
-        ArrayList<Course> expectedCourses = new ArrayList<>();
+        Set<Course> expectedCourses = new HashSet<>();
         expectedCourses.add(philosophy);
         assertEquals(expectedCourses, student.getEnrolledCourses());
         student.addCourse(art);

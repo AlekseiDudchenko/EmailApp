@@ -2,7 +2,8 @@ package studentdatabase;
 
 import constants.Constants;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Student {
 
@@ -10,7 +11,7 @@ public class Student {
     private String lastName;
     private int id;
     private String gradeYear;
-    private ArrayList<Course> courses = new ArrayList<>();
+    private Set<Course> courses = new HashSet<>();
     private static int number = 0;
 
     public Student(String firstName, String lastName){
@@ -40,7 +41,7 @@ public class Student {
         return totalTuition;
     }
 
-    public ArrayList<Course> getEnrolledCourses(){
+    public Set<Course> getEnrolledCourses(){
         return courses;
     }
 
